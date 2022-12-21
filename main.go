@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 var board = [3][3]string{{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}}
@@ -21,8 +20,8 @@ func main() {
 	//i := 0
 	//for ; i < 9; i++ {
 	for turn < 9 && !win {
-		time.Sleep(1 * time.Second)
-		fmt.Println("Enter the box you want to play")
+		//time.Sleep(1 * time.Second)
+		//fmt.Println("Enter the box you want to play")
 		//fmt.Scanln(&box)
 		//placed = placeCounter(box)
 		//for !placed {
@@ -41,7 +40,7 @@ func main() {
 
 func placeCounter(box int) {
 	//var placed bool
-	fmt.Println(board)
+	//fmt.Println(board)
 
 	player = playPiece(box)
 	drawBoard()
@@ -66,7 +65,7 @@ func playPiece(box int) string {
 		board[int(box/3)][box%3] = player
 	}
 	turn++
-	fmt.Println(board)
+	//fmt.Println(board)
 	return player
 }
 
