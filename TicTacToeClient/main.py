@@ -12,6 +12,15 @@ def printBoard(decoded):
         print(println)
 
 
+def startBoard():
+    screen.fill((255, 255, 255))
+    draw.rect(screen, (31, 90, 255), (275, 0, 50, 900))
+    draw.rect(screen, (31, 90, 255), (575, 0, 50, 900))
+    draw.rect(screen, (31, 90, 255), (0, 275, 900, 50))
+    draw.rect(screen, (31, 90, 255), (0, 575, 900, 50))
+    display.flip()
+
+
 def drawBoard(decoded):
     screen.fill((255,255,255))
     draw.rect(screen, (31,90,255), (275,0,50,900))
@@ -64,8 +73,7 @@ width = 900
 height = 900
 screen = display.set_mode((width,height))
 end_program = False
-box = -1
-
+startBoard()
 
 while not end_program:
     for e in event.get():
