@@ -5,15 +5,16 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 var board = [3][3]string{{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}}
 var turn = 0
 var player string
+var win bool
 
 func main() {
 	//var box int
-	var win bool
 	//var placed bool
 	go runServer()
 
@@ -36,6 +37,7 @@ func main() {
 	if turn == 9 && !win {
 		fmt.Println("draw")
 	}
+	time.Sleep(5 * time.Second)
 }
 
 func placeCounter(box int) {
@@ -102,6 +104,7 @@ func drawBoard() {
 func runServer() {
 	http.HandleFunc("/state", getState)
 	http.HandleFunc("/play", playMove)
+	http.HandleFunc("/win", winCheck)
 
 	err := http.ListenAndServe(":80", nil)
 
@@ -128,4 +131,12 @@ func playMove(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 	placeCounter(box)
+}
+
+func winCheck(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	winLocal := strconv.FormatBool(win)
+
+	writeLn := [2]string{player, winLocal}
+	json.NewEncoder(w).Encode(writeLn)
 }
