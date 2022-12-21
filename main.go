@@ -20,24 +20,26 @@ func main() {
 
 	//i := 0
 	//for ; i < 9; i++ {
-	for turn < 9 && !win {
-		//time.Sleep(1 * time.Second)
-		//fmt.Println("Enter the box you want to play")
-		//fmt.Scanln(&box)
-		//placed = placeCounter(box)
-		//for !placed {
-		//	placed = placeCounter(box)
-		//}
-		//fmt.Println(board)
-		win = checkWin()
-		if win {
-			fmt.Println(player, "has won!")
+	for {
+		for turn < 9 && !win {
+			//time.Sleep(1 * time.Second)
+			//fmt.Println("Enter the box you want to play")
+			//fmt.Scanln(&box)
+			//placed = placeCounter(box)
+			//for !placed {
+			//	placed = placeCounter(box)
+			//}
+			//fmt.Println(board)
+			win = checkWin()
+			if win {
+				fmt.Println(player, "has won!")
+			}
 		}
+		if turn == 9 && !win {
+			fmt.Println("draw")
+		}
+		time.Sleep(5 * time.Second)
 	}
-	if turn == 9 && !win {
-		fmt.Println("draw")
-	}
-	time.Sleep(5 * time.Second)
 }
 
 func placeCounter(box int) {
@@ -106,6 +108,7 @@ func runServer() {
 	http.HandleFunc("/state", getState)
 	http.HandleFunc("/play", playMove)
 	http.HandleFunc("/win", winCheck)
+	http.HandleFunc("/reset", resetCheck)
 
 	err := http.ListenAndServe(":80", nil)
 
@@ -141,4 +144,16 @@ func winCheck(w http.ResponseWriter, r *http.Request) {
 
 	writeLn := [3]string{player, winLocal, turnLocal}
 	json.NewEncoder(w).Encode(writeLn)
+}
+
+func resetCheck(w http.ResponseWriter, r *http.Request) {
+	reset := r.URL.Query()["reset"]
+
+	fmt.Println(reset)
+	if reset[0] == "yes" {
+		board = [3][3]string{{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}}
+		turn = 0
+		player = ""
+		win = false
+	}
 }

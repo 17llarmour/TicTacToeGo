@@ -4,6 +4,13 @@ import json
 from random import *
 from pygame import *
 
+
+def newGame():
+    url = "http://localhost/reset" + "?reset=" + "yes"
+    r = requests.post(url)
+    url = "http://localhost/reset" + "?reset=" + "no"
+    r = requests.post(url)
+
 def printBoard(decoded):
     for x in range(3):
         println = ""
@@ -73,6 +80,7 @@ width = 900
 height = 900
 screen = display.set_mode((width,height))
 end_program = False
+newGame()
 startBoard()
 
 while not end_program:
