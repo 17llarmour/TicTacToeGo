@@ -153,7 +153,7 @@ func resetCheck(w http.ResponseWriter, r *http.Request) {
 	if reset[0] == "yes" {
 		board = [3][3]string{{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}}
 		turn = 0
-		player = ""
+		//player = ""
 		win = false
 	}
 }
