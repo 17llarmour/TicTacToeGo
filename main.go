@@ -136,7 +136,8 @@ func playMove(w http.ResponseWriter, r *http.Request) {
 func winCheck(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	winLocal := strconv.FormatBool(win)
+	turnLocal := strconv.Itoa(turn)
 
-	writeLn := [2]string{player, winLocal}
+	writeLn := [3]string{player, winLocal, turnLocal}
 	json.NewEncoder(w).Encode(writeLn)
 }
