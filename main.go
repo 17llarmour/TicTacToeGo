@@ -20,7 +20,7 @@ func main() {
 
 	//i := 0
 	//for ; i < 9; i++ {
-	for turn < 9 {
+	for turn < 9 && !win {
 		time.Sleep(1 * time.Second)
 		fmt.Println("Enter the box you want to play")
 		//fmt.Scanln(&box)
@@ -41,6 +41,8 @@ func main() {
 
 func placeCounter(box int) {
 	//var placed bool
+	fmt.Println(board)
+
 	player = playPiece(box)
 	drawBoard()
 	//if placed {
@@ -53,7 +55,7 @@ func placeCounter(box int) {
 
 func playPiece(box int) string {
 	var player = ""
-	if board[int(box/3)][box%3] == " " {
+	if board[int(box/3)][box%3] != " " {
 		return player
 	}
 	if turn%2 == 0 {
@@ -64,6 +66,7 @@ func playPiece(box int) string {
 		board[int(box/3)][box%3] = player
 	}
 	turn++
+	fmt.Println(board)
 	return player
 }
 
