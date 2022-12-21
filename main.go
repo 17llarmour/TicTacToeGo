@@ -31,7 +31,7 @@ func main() {
 		//fmt.Println(board)
 		win = checkWin()
 		if win {
-			fmt.Println(player, " has won!")
+			fmt.Println(player, "has won!")
 		}
 	}
 	if turn == 9 && !win {
@@ -59,7 +59,7 @@ func playPiece(box int) string {
 	if board[int(box/3)][box%3] != " " {
 		return player
 	}
-	if turn%2 == 0 {
+	if (turn)%2 == 0 {
 		player = "x"
 		board[int(box/3)][box%3] = player
 	} else {
@@ -67,6 +67,7 @@ func playPiece(box int) string {
 		board[int(box/3)][box%3] = player
 	}
 	turn++
+
 	//fmt.Println(board)
 	return player
 }
